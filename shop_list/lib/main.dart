@@ -10,7 +10,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-      
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(),
@@ -26,8 +25,13 @@ class MyHomePage extends StatelessWidget {
       amount: 69.99,
       date: DateTime.now(),
     ),
+    Transaction(
+      id: 't2',
+      title: 'Weekly Groceries',
+      amount: 16.53,
+      date: DateTime.now(),
+    ),
   ];
-
 
   @override
   Widget build(BuildContext context) {
@@ -42,14 +46,32 @@ class MyHomePage extends StatelessWidget {
           Container(
             width: double.infinity,
             child: Card(
-              color: Colors.blue,    
+              color: Colors.blue,
               child: Text('Chart!'),
               elevation: 5,
             ),
           ),
-          Card(
-            color: Colors.red,
-            child: Text('LIST OF TX'),
+          Column(
+            children: transactions.map((tx) {
+              return Card(
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      margin: ,
+                      child: Text(
+                        tx.amount.toString()
+                      ),
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Text(tx.title),
+                        Text(tx.date.toString()),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
           ),
         ],
       ),
