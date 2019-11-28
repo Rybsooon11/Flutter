@@ -31,7 +31,7 @@ class CategoryMealsScreen extends StatelessWidget {
             firstName: categoryPolitics[index].firstName,
             lastName: categoryPolitics[index].lastName,
             imgUrl: categoryPolitics[index].imgUrl,
-            age: categoryPolitics[index].age,
+            views: categoryPolitics[index].views,
           );
         }, itemCount: categoryPolitics.length,),
       );

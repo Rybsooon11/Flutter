@@ -1,3 +1,4 @@
+import 'package:choose_food/models/politics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
@@ -5,13 +6,29 @@ class PoliticItem extends StatelessWidget {
   final String firstName;
   final String lastName;
   final String imgUrl;
-  final int age;
+  final Views views;
 
   PoliticItem(
       {@required this.firstName,
       @required this.lastName,
       @required this.imgUrl,
-      @required this.age});
+      @required this.views});
+
+  String get viewsText {
+    switch (views){
+      case Views.Left:
+        return "Left-wing";
+        break;
+      case Views.Right:
+        return "Right-wing";
+        break;
+      case Views.Center:
+        return "Center-wing";
+        break;
+      default:
+        return "Unkown page";
+    }
+  }
 
   void selectPolitic() {}
 
@@ -63,7 +80,27 @@ class PoliticItem extends StatelessWidget {
                   ),
                 )
               ],
-            )
+            ),
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Row(children: <Widget>[
+                    Icon(Icons.perm_identity),
+                    SizedBox(width: 12),
+                    Text('$firstName $lastName'),
+                  ],
+                  ),
+                  Row(children: <Widget>[
+                    Icon(Icons.visibility),
+                    SizedBox(width: 12),
+                    Text(viewsText),
+                  ],
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
