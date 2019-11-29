@@ -81,6 +81,16 @@ class PoliticDetails extends StatelessWidget {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).primaryColor,
+        child: Icon(
+          Icons.delete,
+          color: Colors.grey,
+        ),
+        onPressed: () {
+          Navigator.of(context).pop(politicId);
+        },
+      ),
     );
   }
 }

@@ -1,24 +1,49 @@
+import 'package:choose_food/models/politics.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/politic_item.dart';
 import '../dummy_data.dart';
 
-class CategoryMealsScreen extends StatelessWidget {
+class CategoryMealsScreen extends StatefulWidget {
   static const routeName = '/category-politics';
-  // final String categoryId;
-  // final String categoryTitle;
 
-  // CategoryMealsScreen(this.categoryId, this.categoryTitle);
+  @override
+  _CategoryMealsScreenState createState() => _CategoryMealsScreenState();
+}
+
+class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
+  String categoryTitle;
+  List<Politic> displayPolitic;
+  bool _loadedInitDate = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    if (!_loadedInitDate) {
+      final routeArgs =
+          ModalRoute.of(context).settings.arguments as Map<String, String>;
+      categoryTitle = routeArgs['title'];
+      final categoryId = routeArgs['id'];
+      displayPolitic = POLITICS.where((politic) {
+        return politic.parties.contains(categoryId);
+      }).toList();
+      _loadedInitDate = true;
+    }
+    super.didChangeDependencies();
+  }
+
+  void _removeItem(String politicId) {
+    setState(() {
+      displayPolitic.removeWhere((meal) => meal.id == politicId);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final routeArgs =
-        ModalRoute.of(context).settings.arguments as Map<String, String>;
-    final categoryTitle = routeArgs['title'];
-    final categoryId = routeArgs['id'];
-    final categoryPolitics = POLITICS.where((politic) {
-      return politic.parties.contains(categoryId);
-    }).toList();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -28,16 +53,19 @@ class CategoryMealsScreen extends StatelessWidget {
       body: ListView.builder(
         itemBuilder: (ctx, index) {
           return PoliticItem(
-            id: categoryPolitics[index].id,
-            firstName: categoryPolitics[index].firstName,
-            lastName: categoryPolitics[index].lastName,
-            imgUrl: categoryPolitics[index].imgUrl,
-            age: categoryPolitics[index].age,
-            education: categoryPolitics[index].education,
-            description: categoryPolitics[index].description,
-            views: categoryPolitics[index].views,
+            id: displayPolitic[index].id,
+            firstName: displayPolitic[index].firstName,
+            lastName: displayPolitic[index].lastName,
+            imgUrl: displayPolitic[index].imgUrl,
+            age: displayPolitic[index].age,
+            education: displayPolitic[index].education,
+            description: displayPolitic[index].description,
+            views: displayPolitic[index].views,
+            removeItem: _removeItem,
           );
-        }, itemCount: categoryPolitics.length,),
-      );
+        },
+        itemCount: displayPolitic.length,
+      ),
+    );
   }
 }
