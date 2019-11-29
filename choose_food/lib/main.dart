@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import './screens/politic_details.dart';
 import './screens/category_meals_screen.dart';
 import './screens/categories_screen.dart';
 
@@ -34,7 +35,18 @@ class MyApp extends StatelessWidget {
       routes: {
         '/' : (ctx) => CategoriesScreen(),
         CategoryMealsScreen.routeName : (ctx) => CategoryMealsScreen(),
+        PoliticDetails.routeName : (ctx) => PoliticDetails(),
+      },
+
+      onGenerateRoute: (settings) {
+        print(settings.arguments);
+        // return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
+      },
+
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
       },
     );
   }
 }
+ 

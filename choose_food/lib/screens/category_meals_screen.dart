@@ -28,9 +28,13 @@ class CategoryMealsScreen extends StatelessWidget {
       body: ListView.builder(
         itemBuilder: (ctx, index) {
           return PoliticItem(
+            id: categoryPolitics[index].id,
             firstName: categoryPolitics[index].firstName,
             lastName: categoryPolitics[index].lastName,
             imgUrl: categoryPolitics[index].imgUrl,
+            age: categoryPolitics[index].age,
+            education: categoryPolitics[index].education,
+            description: categoryPolitics[index].description,
             views: categoryPolitics[index].views,
           );
         }, itemCount: categoryPolitics.length,),

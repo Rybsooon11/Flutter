@@ -1,21 +1,31 @@
-import 'package:choose_food/models/politics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
+import '../models/politics.dart';
+import '../screens/politic_details.dart';
+
 class PoliticItem extends StatelessWidget {
+  final String id;
   final String firstName;
   final String lastName;
   final String imgUrl;
+  final int age;
+  final String education;
+  final String description;
   final Views views;
 
   PoliticItem(
-      {@required this.firstName,
+      {@required this.id,
+      @required this.firstName,
       @required this.lastName,
       @required this.imgUrl,
+      @required this.age,
+      @required this.education,
+      @required this.description,
       @required this.views});
 
   String get viewsText {
-    switch (views){
+    switch (views) {
       case Views.Left:
         return "Left-wing";
         break;
@@ -30,12 +40,17 @@ class PoliticItem extends StatelessWidget {
     }
   }
 
-  void selectPolitic() {}
+  void selectPolitic(BuildContext context) {
+    Navigator.of(context).pushNamed(
+      PoliticDetails.routeName,
+      arguments: id,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: selectPolitic,
+      onTap: () => selectPolitic(context),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
@@ -86,17 +101,19 @@ class PoliticItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  Row(children: <Widget>[
-                    Icon(Icons.perm_identity),
-                    SizedBox(width: 12),
-                    Text('$firstName $lastName'),
-                  ],
+                  Row(
+                    children: <Widget>[
+                      Icon(Icons.perm_identity),
+                      SizedBox(width: 12),
+                      Text('$firstName $lastName'),
+                    ],
                   ),
-                  Row(children: <Widget>[
-                    Icon(Icons.visibility),
-                    SizedBox(width: 12),
-                    Text(viewsText),
-                  ],
+                  Row(
+                    children: <Widget>[
+                      Icon(Icons.visibility),
+                      SizedBox(width: 12),
+                      Text(viewsText),
+                    ],
                   ),
                 ],
               ),

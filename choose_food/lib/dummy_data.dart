@@ -40,6 +40,8 @@ const POLITICS = const [
     imgUrl:
         'https://pbs.twimg.com/profile_images/593430376443445248/m99ZwQgD_400x400.jpg',
     age: 77,
+    education: 'Uniwersytet Warszawski',
+    description: 'Janusz Ryszard Korwin-Mikke (ur. 27 października 1942 w Warszawie) – polski polityk, publicysta i filozof.',
     views: Views.Right,
     isYounger: false,
     isOlder: true,
@@ -54,6 +56,8 @@ const POLITICS = const [
     imgUrl:
         'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Paweł_Kukiz_Sejm_2016_01.JPG/253px-Paweł_Kukiz_Sejm_2016_01.JPG',
     age: 56,
+    education: 'Uniwersytet Warszawski, Uniwersytet Wrocławski',
+    description: 'Paweł Piotr Kukiz – polski polityk, muzyk, wokalista, autor tekstów piosenek, aktor. W latach 1984–2013 lider zespołu Piersi.',
     views: Views.Center,
     isYounger: false,
     isOlder: true,
@@ -68,6 +72,8 @@ const POLITICS = const [
     imgUrl:
         'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Adrian_Zandberg_portrait_2016.jpg/239px-Adrian_Zandberg_portrait_2016.jpg',
     age: 40,
+    education: 'Uniwersytet Warszawski',
+    description: 'Adrian Tadeusz Zandberg – polski historyk, doktor nauk humanistycznych, nauczyciel akademicki, przedsiębiorca, polityk, współzałożyciel i członek Zarządu Krajowego partii Razem.',
     views: Views.Left,
     isYounger: true,
     isOlder: false,
@@ -82,6 +88,8 @@ const POLITICS = const [
     imgUrl:
         'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Jarosław_Kaczyński_Sejm_2016a.JPG/260px-Jarosław_Kaczyński_Sejm_2016a.JPG',
     age: 70,
+    education: 'Wydział Prawa i Administracji Uniwersytetu Warszawskiego. Collegium Iuridicum I',
+    description: 'Jarosław Aleksander Kaczyński – polski polityk i prawnik, współzałożyciel i od 2003 roku prezes partii Prawo i Sprawiedliwość.',
     views: Views.Center,
     isYounger: false,
     isOlder: true,
@@ -96,6 +104,8 @@ const POLITICS = const [
     imgUrl:
         'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Grzegorz_Schetyna_Sejm_2019.jpg/285px-Grzegorz_Schetyna_Sejm_2019.jpg',
     age: 56,
+    education: 'Uniwersytet Wrocławski',
+    description: 'Grzegorz Juliusz Schetyna – polski polityk, z wykształcenia historyk. Od 1997 poseł na Sejm RP III, IV, V, VI, VII, VIII i IX kadencji, w latach 2007–2009 wicepremier oraz minister spraw wewnętrznych.',
     views: Views.Center,
     isYounger: false,
     isOlder: true,

@@ -9,6 +9,8 @@ class Politic {
   final String lastName;
   final String imgUrl;
   final int age;
+  final String education;
+  final String description;
   final Views views;
   final bool isYounger;
   final bool isOlder;
@@ -22,6 +24,8 @@ class Politic {
       @required this.lastName,
       @required this.imgUrl,
       @required this.age,
+      @required this.education,
+      @required this.description,
       @required this.views,
       @required this.isYounger,
       @required this.isOlder,
