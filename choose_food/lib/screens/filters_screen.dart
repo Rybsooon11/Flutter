@@ -4,6 +4,11 @@ import '../widgets/main_drawer.dart';
 class FiltersScreen extends StatefulWidget {
   static const String routeName = '/filters';
 
+  final Function setFilters;
+  final Map<String, bool> currentFilter;
+
+  FiltersScreen(this.currentFilter, this.setFilters);
+
   @override
   _FiltersScreenState createState() => _FiltersScreenState();
 }
@@ -12,7 +17,16 @@ class _FiltersScreenState extends State<FiltersScreen> {
   bool _isYounger = false;
   bool _isOlder = false;
   bool _isMan = false;
-  bool _isWomen = false;
+  bool _isWoman = false;
+
+  @override
+  void initState(){
+    _isYounger = widget.currentFilter['young'];
+    _isOlder = widget.currentFilter['old'];
+    _isMan = widget.currentFilter['man'];
+    _isWoman = widget.currentFilter['woman'];
+    super.initState();
+  }
 
   Widget _buildSwitchListTile(String title, String description,
       bool currentValue, Function updateValue) {
@@ -32,6 +46,20 @@ class _FiltersScreenState extends State<FiltersScreen> {
         title: Text(
           'Filters',
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.save),
+            onPressed: () {
+              final selectedFilters = {
+                'young': _isYounger,
+                'old': _isOlder,
+                'man': _isMan,
+                'woman': _isWoman,
+              };
+              widget.setFilters(selectedFilters);
+            },
+          ),
+        ],
       ),
       drawer: MainDrawer(),
       body: Column(
@@ -84,12 +112,12 @@ class _FiltersScreenState extends State<FiltersScreen> {
                 ),
                 _buildSwitchListTile(
                   'Women',
-                  'Politics who are a women',
-                  _isWomen,
+                  'Politics who are a woman',
+                  _isWoman,
                   (newValue) {
                     setState(
                       () {
-                        _isWomen = newValue;
+                        _isWoman = newValue;
                       },
                     );
                   },

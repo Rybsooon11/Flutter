@@ -5,6 +5,11 @@ import '../dummy_data.dart';
 class PoliticDetails extends StatelessWidget {
   static const String routeName = '/politic-detail';
 
+  final Function addToFavorite;
+  final Function isFavorite;
+
+  PoliticDetails(this.addToFavorite, this.isFavorite );
+
   @override
   Widget build(BuildContext context) {
     final politicId = ModalRoute.of(context).settings.arguments as String;
@@ -84,12 +89,9 @@ class PoliticDetails extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
         child: Icon(
-          Icons.delete,
-          color: Colors.grey,
+          isFavorite(politicId) ? Icons.star : Icons.star_border,
         ),
-        onPressed: () {
-          Navigator.of(context).pop(politicId);
-        },
+        onPressed: () => addToFavorite(politicId),
       ),
     );
   }

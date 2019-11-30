@@ -46,7 +46,7 @@ const POLITICS = const [
     isYounger: false,
     isOlder: true,
     isMan: true,
-    isWomen: false,
+    isWoman: false,
   ),
   Politic(
     id: 'p2',
@@ -62,7 +62,7 @@ const POLITICS = const [
     isYounger: false,
     isOlder: true,
     isMan: true,
-    isWomen: false,
+    isWoman: false,
   ),
   Politic(
     id: 'p3',
@@ -78,7 +78,7 @@ const POLITICS = const [
     isYounger: true,
     isOlder: false,
     isMan: true,
-    isWomen: false,
+    isWoman: false,
   ),
   Politic(
     id: 'p4',
@@ -94,7 +94,7 @@ const POLITICS = const [
     isYounger: false,
     isOlder: true,
     isMan: true,
-    isWomen: false,
+    isWoman: false,
   ),
   Politic(
     id: 'p5',
@@ -110,6 +110,6 @@ const POLITICS = const [
     isYounger: false,
     isOlder: true,
     isMan: true,
-    isWomen: false,
+    isWoman: false,
   ),
 ];

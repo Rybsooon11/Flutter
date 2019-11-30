@@ -15,7 +15,7 @@ class Politic {
   final bool isYounger;
   final bool isOlder;
   final bool isMan;
-  final bool isWomen;
+  final bool isWoman;
 
   const Politic(
       {@required this.id,
@@ -30,5 +30,5 @@ class Politic {
       @required this.isYounger,
       @required this.isOlder,
       @required this.isMan,
-      @required this.isWomen});
+      @required this.isWoman});
 }

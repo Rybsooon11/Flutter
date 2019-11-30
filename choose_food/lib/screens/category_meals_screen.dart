@@ -2,10 +2,13 @@ import 'package:choose_food/models/politics.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/politic_item.dart';
-import '../dummy_data.dart';
 
 class CategoryMealsScreen extends StatefulWidget {
   static const routeName = '/category-politics';
+
+  final List<Politic> avaiableList;
+
+  CategoryMealsScreen(this.avaiableList);
 
   @override
   _CategoryMealsScreenState createState() => _CategoryMealsScreenState();
@@ -28,7 +31,7 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
           ModalRoute.of(context).settings.arguments as Map<String, String>;
       categoryTitle = routeArgs['title'];
       final categoryId = routeArgs['id'];
-      displayPolitic = POLITICS.where((politic) {
+      displayPolitic = widget.avaiableList.where((politic) {
         return politic.parties.contains(categoryId);
       }).toList();
       _loadedInitDate = true;
@@ -61,7 +64,6 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
             education: displayPolitic[index].education,
             description: displayPolitic[index].description,
             views: displayPolitic[index].views,
-            removeItem: _removeItem,
           );
         },
         itemCount: displayPolitic.length,

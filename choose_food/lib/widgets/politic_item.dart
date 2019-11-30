@@ -13,7 +13,6 @@ class PoliticItem extends StatelessWidget {
   final String education;
   final String description;
   final Views views;
-  final Function removeItem;
 
   PoliticItem(
       {@required this.id,
@@ -23,8 +22,7 @@ class PoliticItem extends StatelessWidget {
       @required this.age,
       @required this.education,
       @required this.description,
-      @required this.views,
-      @required this.removeItem});
+      @required this.views,});
 
   String get viewsText {
     switch (views) {
@@ -47,8 +45,9 @@ class PoliticItem extends StatelessWidget {
       PoliticDetails.routeName,
       arguments: id,
     ).then((result) => {
-        if(result != null)
-          removeItem(result),
+        if(result != null){
+          // removeItem(result),
+        }
     });
   }
 
