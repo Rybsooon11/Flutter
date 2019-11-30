@@ -30,7 +30,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Your Filters',
+          'Filters',
         ),
       ),
       drawer: MainDrawer(),
@@ -39,7 +39,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
           Container(
             padding: EdgeInsets.all(15),
             child: Text(
-              'Your choise',
+              'Choose filter',
               style: Theme.of(context).textTheme.title,
             ),
           ),
