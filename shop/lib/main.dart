@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         routes: {
           ProductDetailSCreen.routeName: (ctx) => ProductDetailSCreen(),
         },
-      ),
+      ), create: (BuildContext context) {},
     );
   }
 }
