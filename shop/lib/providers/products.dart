@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import './product.dart';
 
-class Products with ChangeNotifier{
+class Products with ChangeNotifier {
   List<Product> _items = [
     Product(
       id: 'p1',
@@ -17,8 +17,7 @@ class Products with ChangeNotifier{
       title: 'Trousers',
       description: 'A nice pair of trousers.',
       price: 59.99,
-      imageUrl:
-          'https://www.magee1866.com/Images/Models/Full/11777.Jpg',
+      imageUrl: 'https://www.magee1866.com/Images/Models/Full/11777.Jpg',
     ),
     Product(
       id: 'p3',
@@ -42,9 +41,9 @@ class Products with ChangeNotifier{
 
   List<Product> get items {
     // if(_showFavoriteOnly) {
-    //   return _items.where((prodItem) => prodItem.isFavorite).toList(); 
+    //   return _items.where((prodItem) => prodItem.isFavorite).toList();
     // }
-      return [..._items];
+    return [..._items];
   }
 
   List<Product> get favoriteItems {
@@ -65,7 +64,25 @@ class Products with ChangeNotifier{
   //   notifyListeners();
   // }
 
-  void addProduct() {
+  void addProduct(Product product) {
+    final newProduct = Product(
+      title: product.title,
+      description: product.description,
+      price: product.price,
+      imageUrl: product.imageUrl,
+      id: DateTime.now().toString(),
+    );
+    _items.add(newProduct);
     notifyListeners();
+  }
+
+  void updateProduct(String id, Product newProduct) {
+    final prodIndex = _items.indexWhere((prod) => prod.id == id);
+    if (prodIndex > 0) {
+      _items[prodIndex] = newProduct;
+      notifyListeners();
+    } else{
+      print('...');
+    }
   }
 }
