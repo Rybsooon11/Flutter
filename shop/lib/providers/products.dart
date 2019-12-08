@@ -7,37 +7,6 @@ import './product.dart';
 
 class Products with ChangeNotifier {
   List<Product> _items = [
-    // Product(
-    //   id: 'p1',
-    //   title: 'Red Shirt',
-    //   description: 'A red shirt - it is pretty red!',
-    //   price: 29.99,
-    //   imageUrl:
-    //       'http://ae01.alicdn.com/kf/HTB1Q8XmJSzqK1RjSZPxq6A4tVXa7.jpg?width=1000&height=1000&hash=2000',
-    // ),
-    // Product(
-    //   id: 'p2',
-    //   title: 'Trousers',
-    //   description: 'A nice pair of trousers.',
-    //   price: 59.99,
-    //   imageUrl: 'https://www.magee1866.com/Images/Models/Full/11777.Jpg',
-    // ),
-    // Product(
-    //   id: 'p3',
-    //   title: 'Yellow Scarf',
-    //   description: 'Warm and cozy - exactly what you need for the winter.',
-    //   price: 19.99,
-    //   imageUrl:
-    //       'https://live.staticflickr.com/4043/4438260868_cc79b3369d_z.jpg',
-    // ),
-    // Product(
-    //   id: 'p4',
-    //   title: 'A Pan',
-    //   description: 'Prepare any meal you want.',
-    //   price: 49.99,
-    //   imageUrl:
-    //       'http://www.juegosdemariobross.net/aura/Frying-Pan-Clipart-Clipart-Suggest.jpg',
-    // ),
   ];
 
   var _showFavoriteOnly = false;
@@ -67,14 +36,24 @@ class Products with ChangeNotifier {
   //   notifyListeners();
   // }
 
-  Future<void> fetchAndSetProducts() async {
-    const url = 'https://flutter-shop-cec37.firebaseio.com/products.json';
+  final String authToken;
+  final String userId;
+
+  Products(this.authToken, this.userId, this._items);
+
+  Future<void> fetchAndSetProducts([bool filterByUser = false]) async {
+    final filterString = filterByUser ? 'orderBy="creatorId"&equalTo="$userId"' : '';
+    var url = 'https://flutter-shop-cec37.firebaseio.com/products.json?auth=$authToken&$filterString';
     try {
       final response = await http.get(url);
       final extractData = json.decode(response.body) as Map<String, dynamic>;
       if(extractData == null) {
         return;
       }
+       url =
+        'https://flutter-shop-cec37.firebaseio.com/userFavorite/$userId.json?auth=$authToken';
+      final favoriteResponse = await http.get(url);
+      final favoriteData = json.decode(favoriteResponse.body);
       final List<Product> loadedProducts = [];
       extractData.forEach((prodId, prodData) {
         loadedProducts.add(Product(
@@ -83,7 +62,7 @@ class Products with ChangeNotifier {
           description: prodData['description'],
           price: prodData['price'],
           imageUrl: prodData['imageUrl'],
-          isFavorite: prodData['isFavorite'],
+          isFavorite: favoriteData == null ? false : favoriteData[prodId] ?? false,
         ));
       });
       _items = loadedProducts;
@@ -94,7 +73,7 @@ class Products with ChangeNotifier {
   }
 
   Future<void> addProduct(Product product) async {
-    const url = 'https://flutter-shop-cec37.firebaseio.com/products.json';
+    final url = 'https://flutter-shop-cec37.firebaseio.com/products.json?auth=$authToken';
     try {
       final response = await http.post(
         url,
@@ -103,7 +82,7 @@ class Products with ChangeNotifier {
           'description': product.description,
           'imageUrl': product.imageUrl,
           'price': product.price,
-          'isFavorite': product.isFavorite,
+          'creatorId': userId,
         }),
       );
       final newProduct = Product(
@@ -124,7 +103,7 @@ class Products with ChangeNotifier {
   Future<void> updateProduct(String id, Product newProduct) async {
     final prodIndex = _items.indexWhere((prod) => prod.id == id);
     if (prodIndex > 0) {
-      final url = 'https://flutter-shop-cec37.firebaseio.com/products/$id.json';
+      final url = 'https://flutter-shop-cec37.firebaseio.com/products/$id.json?auth=$authToken';
       await http.patch(
         url,
         body: json.encode({
@@ -142,7 +121,7 @@ class Products with ChangeNotifier {
   }
 
   Future<void> deleteProduct(String id) async {
-    final url = 'https://flutter-shop-cec37.firebaseio.com/products/$id.json';
+    final url = 'https://flutter-shop-cec37.firebaseio.com/products/$id.json?auth=$authToken';
     final existingProductIndex = _items.indexWhere((prod) => prod.id == id);
     var existingProduct = _items[existingProductIndex];
     final response = await http.delete(url);
