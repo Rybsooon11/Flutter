@@ -28,8 +28,9 @@ class ProductItem extends StatelessWidget {
               arguments: product.id,
             );
           },
-          child: Image.network(
-            product.imageUrl,
+          child: FadeInImage(
+            placeholder: AssetImage('assets/images/product-placeholder.png'),
+            image: NetworkImage(product.imageUrl),
             fit: BoxFit.cover,
           ),
         ),
@@ -60,9 +61,12 @@ class ProductItem extends StatelessWidget {
               Scaffold.of(context).showSnackBar(SnackBar(
                 content: Text('Added item to cart!'),
                 duration: Duration(seconds: 2),
-                action: SnackBarAction(label: 'UNDO', onPressed: () {
-                  cart.removeSingleItem(product.id);
-                },),
+                action: SnackBarAction(
+                  label: 'UNDO',
+                  onPressed: () {
+                    cart.removeSingleItem(product.id);
+                  },
+                ),
               ));
             },
             color: Theme.of(context).accentColor,
